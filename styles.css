@@ -1,0 +1,40 @@
+/**
+ 
+* : css cho toàn bộ thẻ
+
+ */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/*  Start Header */
+
+.header {
+  background-color: bisque;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 30px;
+}
+
+.header .header-menu {
+  margin-top: 20px;
+}
+
+.header .header-menu ul li {
+  display: inline;
+  margin-right: 20px;
+}
+/*  End Header */
+
+/* Start Carousel */
+.carousel {
+  height: 700px;
+
+  background-image: url('./Image/BG.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+/* End Carousel */
