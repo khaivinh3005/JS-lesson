@@ -9,6 +9,10 @@
   box-sizing: border-box;
 }
 
+body {
+  background-color: bisque;
+}
+
 /*  Start Header */
 
 .header {
@@ -38,3 +42,48 @@
   background-repeat: no-repeat;
 }
 /* End Carousel */
+
+/* Start List */
+
+.list {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 20px;
+
+  margin-top: 40px;
+}
+
+.list .list-item {
+  width: 300px;
+  /* height: 500px; */
+  background-color: white;
+  border-radius: 15px;
+
+  padding: 12px;
+}
+
+.list .list-item .list-image {
+  display: flex;
+  justify-content: center;
+}
+
+.list-item .list-image img {
+  border-radius: 20px;
+  width: 230px;
+}
+
+.list-item .list-content {
+  line-height: 25px;
+  text-align: center;
+}
+
+.list-item .list-content p {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.list-item .list-content button {
+  padding: 10px 35px;
+  border-radius: 20px;
+  border: none;
+}

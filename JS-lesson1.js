@@ -21,4 +21,4 @@ var multiple = numberOne * numberTwo;
 var devide = numberOne / numberTwo;
 var miss = numberOne % numberTwo;
 var total = sum + multiple + devide + miss - '2';
-console.log('total: ', total);
+console.log(typeof numberOne);
