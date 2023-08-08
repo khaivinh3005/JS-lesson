@@ -35,3 +35,21 @@ tinhTong(numberA);
 // } else {
 //   console.log('numberA = number B');
 // }
+
+/**
+ * && : và
+ * || : hoặc
+ * == : so sánh bằng
+ * >= ; so sánh lớn hơn hoặc bằng
+ * <= ; so sánh bé hơn hoặc bằng
+ * != ; khác
+ */
+
+var a = 4;
+var b = 4;
+
+if (a != b) {
+  console.log('a hoặc b có giá trị');
+} else {
+  console.log('ca a va b ko co gia tri');
+}
