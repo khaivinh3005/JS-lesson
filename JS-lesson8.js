@@ -18,18 +18,18 @@ function tenCuaThe(thamSo) {
 function tinhTong() {
   var giaTriA = elementA.value;
   var giaTriB = elementB.value;
-  var thoaDieuKien = soSanhThoaManDieuKien(giaTriA, giaTriB);
-  if (thoaDieuKien) {
-    console.log('sum : ', giaTriA + giaTriB);
+  var thoaDieuKien;
+  // C1:
+  if (giaTriA && giaTriB) {
+    thoaDieuKien = true;
   } else {
-    alert('vui long nhap day du thong tin');
+    thoaDieuKien = false;
   }
-}
 
-function tinhHieu() {
-  var giaTriA = elementA.value;
-  var giaTriB = elementB.value;
-  var thoaDieuKien = soSanhThoaManDieuKien(giaTriA, giaTriB);
+  // c2
+  //   thoaDieuKien = soSanhThoaManDieuKien(giaTriA, giaTriB);
+
+  console.log('thoaDieuKien: ', thoaDieuKien);
 }
 
 function soSanhThoaManDieuKien(thamSoA, thamSoB) {
