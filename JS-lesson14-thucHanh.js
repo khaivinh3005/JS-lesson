@@ -64,11 +64,13 @@ function showNoiDung() {
         alt=${tenSP}
         width="200"
         height="400"
-        style="height: 200px "
+        style="height: 200px"
         />
         <h1>Tên sản phẩm : <span>${tenSP}</span></h1>
         <h3>Giá : <span>${price}</span></h3>
-        <span class="sales">Sales ${sales}%</span>
+        <span class="sales" style="background-color: ${
+          item.name === 'Iphone 15' ? 'blue' : 'red'
+        }">Sales ${sales}%</span>
     </div>
     `;
   });
