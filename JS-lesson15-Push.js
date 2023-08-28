@@ -119,6 +119,6 @@ function addItem() {
  * Làm trang FPT : Header + danh mục từng thiết bị điện tử + danh Sách laptop
  * Danh Sách Laptop:
  * Tạo thêm input bao gồm : Tên + giá + hình ảnh + giá đã giảm
- *
+ * Làm chức năng thêm sản phẩm laptop và hiển thị giao diện
  *
  */
