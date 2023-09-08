@@ -4,8 +4,13 @@ var elementPrice = document.getElementById('price');
 var elementLinkImage = document.getElementById('picture');
 var elementSales = document.getElementById('sales');
 var elementButton = document.getElementById('button');
+var elementInput = document.querySelector('#input-search');
+var elementBtnSearch = document.querySelector('#btn-search');
 
 elementButton.addEventListener('click', addItem);
+elementBtnSearch.addEventListener('click', handleSearch);
+
+elementInput.addEventListener('keyup', handleSearch);
 
 var danhSachDienThoai = [
   {
@@ -24,7 +29,7 @@ var danhSachDienThoai = [
   },
   {
     id: 3,
-    name: 'Iphone 11',
+    name: 'Iphone 12',
     price: 30000000,
     image:
       'https://cdn.tgdd.vn/Products/Images/42/230521/iphone-13-pro-thumb-600x600.jpg',
@@ -36,10 +41,19 @@ var danhSachDienThoai = [
     image:
       'https://cdn.tgdd.vn/Products/Images/42/247508/iphone-14-pro-vang-thumb-600x600.jpg',
   },
+  {
+    id: 5,
+    name: 'Iphone 15',
+    price: 100000000,
+    image:
+      'https://vcdn-sohoa.vnecdn.net/2023/08/22/iPhone-15-Pro-Burgandy-Feature-1241-3763-1692676036.jpg?w=0&h=0&q=100&dpr=2&fit=crop&s=K1MUebStDTCs1al8R_kTtw',
+    sales: 10,
+  },
 ];
 
 function showNoiDung() {
   var str = '';
+  console.log('danhSachDienThoai : ', danhSachDienThoai);
   //Hàm map
   danhSachDienThoai.map((item, index) => {
     var tenSP = item.name;
@@ -110,6 +124,81 @@ function addItem() {
   }
 }
 
+function handleSearch() {
+  /**
+   * B1: Chuyển đổi giá trị user nhập remove space và chuyển thành chữ thường hết
+   * B2: Chuyển đổi giá trị name trong danhSachDienThoai thành chữ thường và remove space
+   */
+
+  //B1
+  var valueSearchUser = elementInput.value;
+  valueSearchUser = valueSearchUser.replace(/\s/g, '').toLowerCase();
+
+  //B2
+  var viTri = danhSachDienThoai.findIndex((item, index) => {
+    // Chuyển đổi tên trong danh sách thành chữ thường
+    var namePhone = item.name.replace(/\s/g, '').toLowerCase();
+
+    // Nếu ng dùng nhập iphone10 thì mình sẽ gán giá trị ng dùng nhập bằng iphone x
+    if (valueSearchUser === 'iphone10') {
+      valueSearchUser = 'iphonex';
+    }
+
+    // So sánh giá trị người dùng nhập với namePhone
+    var find = namePhone === valueSearchUser;
+    return find;
+  });
+
+  if (viTri !== -1) {
+    console.log('viTri : ', viTri);
+    var danhSachDienThoaiUpdate = [];
+    danhSachDienThoaiUpdate.push(danhSachDienThoai[viTri]);
+    danhSachDienThoai = danhSachDienThoaiUpdate;
+    showNoiDung();
+  } else {
+    danhSachDienThoai = [
+      {
+        id: 1,
+        name: 'Iphone X',
+        price: 10000000,
+        image:
+          'https://cdn.tgdd.vn/Products/Images/42/114115/iphone-x-64gb-hh-600x600.jpg',
+      },
+      {
+        id: 2,
+        name: 'Iphone 11',
+        price: 20000000,
+        image:
+          'https://cdn.hoanghamobile.com/i/preview/Uploads/2020/09/17/51kGDXeFZKL._SL1024_.jpg',
+      },
+      {
+        id: 3,
+        name: 'Iphone 12',
+        price: 30000000,
+        image:
+          'https://cdn.tgdd.vn/Products/Images/42/230521/iphone-13-pro-thumb-600x600.jpg',
+      },
+      {
+        id: 4,
+        name: 'Iphone 14',
+        price: 40000000,
+        image:
+          'https://cdn.tgdd.vn/Products/Images/42/247508/iphone-14-pro-vang-thumb-600x600.jpg',
+      },
+      {
+        id: 5,
+        name: 'Iphone 15',
+        price: 100000000,
+        image:
+          'https://vcdn-sohoa.vnecdn.net/2023/08/22/iPhone-15-Pro-Burgandy-Feature-1241-3763-1692676036.jpg?w=0&h=0&q=100&dpr=2&fit=crop&s=K1MUebStDTCs1al8R_kTtw',
+        sales: 10,
+      },
+    ];
+
+    showNoiDung();
+  }
+}
+
 /**
  * Bài tập về nhà
  * Làm trang FPT : Header + danh mục từng thiết bị điện tử + danh Sách laptop
@@ -118,23 +207,6 @@ function addItem() {
  * Làm chức năng thêm sản phẩm laptop và hiển thị giao diện
  *
  */
-
-var danhSachDienThoai = [
-  {
-    id: 1,
-    name: 'Iphone X',
-    price: 10000000,
-    image:
-      'https://cdn.tgdd.vn/Products/Images/42/114115/iphone-x-64gb-hh-600x600.jpg',
-  },
-  {
-    id: 2,
-    name: 'Iphone 11',
-    price: 20000000,
-    image:
-      'https://cdn.hoanghamobile.com/i/preview/Uploads/2020/09/17/51kGDXeFZKL._SL1024_.jpg',
-  },
-];
 
 /** Show danh sách sản phẩm
  * Cho trước danh sách sản phẩm
