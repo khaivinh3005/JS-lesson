@@ -19,6 +19,7 @@ const callAPI = () => {
   })
     .then((response) => {
       let data = response.data;
+      setLocalStorage(data);
       showUI(data);
     })
     .catch((error) => {
@@ -30,7 +31,7 @@ callAPI();
 
 const showUI = (data) => {
   let str = '';
-  data.map((item, index) => {
+  data.map((item, index, listData) => {
     str += `
     <div class="col-sm-4">
     <div class="card">
@@ -39,7 +40,11 @@ const showUI = (data) => {
         alt="meomeo"
         width="400"
         height="200"
-        src="${item.image}"
+        src=${
+          item.image.length > 10
+            ? item.image
+            : 'https://haycafe.vn/wp-content/uploads/2022/07/anh-wibu-co-hau-gai-toc-xanh.jpg'
+        }
       />
       <div class="card-body">
         <h5 class="card-title">${item.name}</h5>
@@ -47,8 +52,12 @@ const showUI = (data) => {
           With supporting text below as a natural lead-in to additional
           content.
         </p>
-        <span onclick='saveChange(${item.id})' class="btn btn-primary">Edit</span>
-        <span onclick='deleteItem(${item.id})' class="btn btn-danger">Delete</span>
+        <span onclick='editUser(${
+          item.id
+        }, ${listData})' class="btn btn-primary">Edit</span>
+        <span onclick='deleteItem(${
+          item.id
+        })' class="btn btn-danger">Delete</span>
       </div>
     </div>
     </div>
@@ -57,6 +66,10 @@ const showUI = (data) => {
 
   listElement.innerHTML = str;
 };
+
+function setLocalStorage(listUser) {
+  localStorage.setItem('DSNV', JSON.stringify(listUser));
+}
 
 // Hàm xoá: API xoá item mà mình muốn
 const deleteItem = (id) => {
@@ -81,6 +94,8 @@ const callApiUpdate = (id, updatedObject) => {
     data: updatedObject,
   }).then((response) => {
     if (response.data) {
+      document.querySelector('.modal').classList.remove('show');
+      document.querySelector('.modal').style.display = 'none';
       alert('Đã chỉnh sửa thành công');
       callAPI();
     }
@@ -88,17 +103,34 @@ const callApiUpdate = (id, updatedObject) => {
 };
 
 // Hàm chỉnh sửa
-const saveChange = (id) => {
-  const updatedObject = {
-    name: 'Wibu',
-    avatar: 'Wibu',
-    image:
-      'https://statusneo.com/wp-content/uploads/2023/02/MicrosoftTeams-image551ad57e01403f080a9df51975ac40b6efba82553c323a742b42b1c71c1e45f1.jpg',
-  };
+const saveChange = (id, data) => {
+  console.log('list : ', data);
+  let listUserLocal = [];
+  if (localStorage.getItem('DSNV') !== null) {
+    listUserLocal = JSON.parse(localStorage.getItem('DSNV'));
+  }
 
-  callApiUpdate(id, updatedObject);
+  const index = listUserLocal.findIndex((item) => item.id == id);
+  const user = listUserLocal[index];
+
+  document.querySelector('#idItem').value = user.name;
+  document.querySelector('#idImage').value = user.image;
+  document.querySelector('.modal').classList.add('show');
+  document.querySelector('.modal').style.display = 'block';
+
+  document.getElementById('btnSave').addEventListener('click', function () {
+    const updateObject = {
+      name: document.querySelector('#idItem').value,
+      image: document.querySelector('#idImage').value,
+    };
+
+    callApiUpdate(listUserLocal[index].id, updateObject);
+  });
+
+  // callApiUpdate(id, updatedObject);
 };
 
+// Hàm thêm user
 const callAPIAddUser = () => {
   //newObject
   axios({
@@ -115,4 +147,10 @@ const callAPIAddUser = () => {
       callAPI();
     }
   });
+};
+
+// Hàm edit User
+const editUser = (id, listData) => {
+  console.log('id  : ', id);
+  console.log('listData : ', listData);
 };
