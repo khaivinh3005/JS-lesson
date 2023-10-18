@@ -52,9 +52,9 @@ const showUI = (data) => {
           With supporting text below as a natural lead-in to additional
           content.
         </p>
-        <span onclick='editUser(${
-          item.id
-        }, ${listData})' class="btn btn-primary">Edit</span>
+        <span onclick='saveChange(${item.id}, ${JSON.stringify(
+      listData
+    )})' class="btn btn-primary">Edit</span>
         <span onclick='deleteItem(${
           item.id
         })' class="btn btn-danger">Delete</span>
@@ -94,10 +94,7 @@ const callApiUpdate = (id, updatedObject) => {
     data: updatedObject,
   }).then((response) => {
     if (response.data) {
-      document.querySelector('.modal').classList.remove('show');
-      document.querySelector('.modal').style.display = 'none';
-      alert('Đã chỉnh sửa thành công');
-      callAPI();
+      console.log('response.data : ', response.data);
     }
   });
 };
@@ -126,8 +123,6 @@ const saveChange = (id, data) => {
 
     callApiUpdate(listUserLocal[index].id, updateObject);
   });
-
-  // callApiUpdate(id, updatedObject);
 };
 
 // Hàm thêm user
