@@ -94,7 +94,8 @@ const callApiUpdate = (id, updatedObject) => {
     data: updatedObject,
   }).then((response) => {
     if (response.data) {
-      console.log('response.data : ', response.data);
+      alert('cap nhat thanh cong');
+      location.reload();
     }
   });
 };
@@ -144,8 +145,10 @@ const callAPIAddUser = () => {
   });
 };
 
-// Hàm edit User
-const editUser = (id, listData) => {
-  console.log('id  : ', id);
-  console.log('listData : ', listData);
+const getLocalStorage = () => {
+  if (localStorage.getItem('DSNV')) {
+    return JSON.parse(localStorage.getItem('DSNV'));
+  }
 };
+
+const data = getLocalStorage();
